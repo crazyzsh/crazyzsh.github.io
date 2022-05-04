@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>js常用技巧 |  crazyzsh博客空间</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-2022/js_skills"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  js常用技巧
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/05/02/2022/js_skills/" class="article-date">
+  <time datetime="2022-05-02T14:04:12.000Z" itemprop="datePublished">2022-05-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">6 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="1-初始化数组"><a href="#1-初始化数组" class="headerlink" title="1. 初始化数组"></a>1. 初始化数组</h2><p>初始化一维数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=<span class="built_in">Array</span>(<span class="number">5</span>).fill(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>初始化二维数组</p>
+<p>fill方法可以不传参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=<span class="built_in">Array</span>(<span class="number">5</span>).fill().map(<span class="function">()=&gt;</span><span class="built_in">Array</span>(<span class="number">5</span>).fill(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-reduce求和、极值"><a href="#2-reduce求和、极值" class="headerlink" title="2. reduce求和、极值"></a>2. reduce求和、极值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>]</span><br><span class="line"><span class="keyword">let</span> sum = arr.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b)</span><br><span class="line"><span class="keyword">let</span> min = arr.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a &gt; b ? b : a)</span><br><span class="line"><span class="keyword">let</span> max = arr.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a &gt; b ? a : b)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Math求极值"><a href="#3-Math求极值" class="headerlink" title="3. Math求极值"></a>3. Math求极值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>]</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">Math</span>.max(...arr)</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//9</span></span><br><span class="line"></span><br><span class="line">b = <span class="built_in">Math</span>.min(...arr)</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-排序"><a href="#4-排序" class="headerlink" title="4. 排序"></a>4. 排序</h2><p>数组经过排序后<strong>原数组会发生改变</strong>，同时数组排序也会返回一个数组，这个数组就是<strong>原数组</strong>经过排序后的数组</p>
+<p>排序数值型数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>]</span><br><span class="line"><span class="keyword">let</span> a = arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line"><span class="built_in">console</span>.log(a === arr); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>排序字符串数组【根据ASCII值来进行排序】</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stringArr = [<span class="string">&quot;Joe&quot;</span>, <span class="string">&quot;Kapil&quot;</span>, <span class="string">&quot;Steve&quot;</span>, <span class="string">&quot;Musk&quot;</span>]</span><br><span class="line">stringArr.sort();</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">[<span class="string">&quot;Joe&quot;</span>, <span class="string">&quot;Kapil&quot;</span>, <span class="string">&quot;Musk&quot;</span>, <span class="string">&quot;Steve&quot;</span>]</span><br><span class="line">stringArr.reverse();</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">[<span class="string">&quot;Steve&quot;</span>, <span class="string">&quot;Musk&quot;</span>, <span class="string">&quot;Kapil&quot;</span>, <span class="string">&quot;Joe&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-从数组中过滤出虚假值"><a href="#5-从数组中过滤出虚假值" class="headerlink" title="5. 从数组中过滤出虚假值"></a>5. 从数组中过滤出虚假值</h2><p><code>0</code>，<code>undefined</code>，<code>null</code>，<code>false</code>，<code>&quot;&quot;</code>，<code>&#39;&#39;</code>可以很容易地通过以下方法省略</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">3</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;&#x27;</span>, <span class="literal">false</span>];</span><br><span class="line"><span class="keyword">let</span> a = array.filter(<span class="built_in">Boolean</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-对各种条件使用逻辑运算符"><a href="#6-对各种条件使用逻辑运算符" class="headerlink" title="6. 对各种条件使用逻辑运算符"></a>6. 对各种条件使用逻辑运算符</h2><p>使用逻辑运算符可以减少嵌套 <code>if…else </code>或 <code>switch case</code>，可以简单地使用基本的逻辑运算符<code>AND/OR</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">arg1</span>) </span>&#123;</span><br><span class="line">    arg1 = arg1 || <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 如果尚未设置，则将 arg1 设置为 10 作为默认值</span></span><br><span class="line">    <span class="keyword">return</span> arg1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> foo = <span class="number">10</span>;</span><br><span class="line">foo === <span class="number">10</span> &amp;&amp; <span class="built_in">console</span>.log(doSomething(<span class="number">32</span>)); <span class="comment">//32</span></span><br><span class="line">foo === <span class="number">5</span> &amp;&amp; <span class="built_in">console</span>.log(doSomething()); <span class="comment">// 不执行函数</span></span><br><span class="line">foo === <span class="number">5</span> || <span class="built_in">console</span>.log(doSomething()); <span class="comment">// 10</span></span><br><span class="line">foo === <span class="number">10</span> || <span class="built_in">console</span>.log(doSomething(<span class="number">12</span>)); <span class="comment">// 不执行函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-数组去重"><a href="#7-数组去重" class="headerlink" title="7. 数组去重"></a>7. 数组去重</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">5</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> out = array.filter(<span class="function">(<span class="params">item, index, arr</span>) =&gt;</span> arr.indexOf(item) === index);</span><br><span class="line"><span class="built_in">console</span>.log(out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> unique = [...new <span class="built_in">Set</span>(array)];</span><br><span class="line"><span class="built_in">console</span>.log(unique);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-创建计数器"><a href="#8-创建计数器" class="headerlink" title="8. 创建计数器"></a>8. 创建计数器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> string = <span class="string">&#x27;kapilalipak&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1</span></span><br><span class="line"><span class="keyword">const</span> table = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> char <span class="keyword">of</span> string) &#123;</span><br><span class="line">    table[char] = table[char] + <span class="number">1</span> || <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(table); <span class="comment">//&#123; k: 2, a: 3, p: 2, i: 2, l: 2 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2</span></span><br><span class="line"><span class="keyword">const</span> countMap = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; string.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (countMap.has(string[i])) &#123;</span><br><span class="line">        countMap.set(string[i], countMap.get(string[i]) + <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        countMap.set(string[i], <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(countMap) <span class="comment">//Map(5) &#123; &#x27;k&#x27; =&gt; 2, &#x27;a&#x27; =&gt; 3, &#x27;p&#x27; =&gt; 2, &#x27;i&#x27; =&gt; 2, &#x27;l&#x27; =&gt; 2 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-巧用三元运算符"><a href="#9-巧用三元运算符" class="headerlink" title="9. 巧用三元运算符"></a>9. 巧用三元运算符</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lottery</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> number &gt; <span class="number">97</span> ? <span class="string">&#x27;Beautiful&#x27;</span> :</span><br><span class="line">        number &lt; <span class="number">97</span> ? <span class="string">&#x27;Once Again!!&#x27;</span> : <span class="string">&#x27;You Got It&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Lottery(<span class="number">98</span>)); <span class="comment">// Beautiful</span></span><br><span class="line"><span class="built_in">console</span>.log(Lottery(<span class="number">97</span>)); <span class="comment">// You Got It</span></span><br><span class="line"><span class="built_in">console</span>.log(Lottery(<span class="number">88</span>)); <span class="comment">// Once Again!!</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="10-合并对象或数组"><a href="#10-合并对象或数组" class="headerlink" title="10. 合并对象或数组"></a>10. 合并对象或数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [...arr1, ...arr2]</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    ...obj1,</span><br><span class="line">    ...obj2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [ 1, 2, 3, 4, 5, 6 ]</span></span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">// &#123; name: &#x27;zs&#x27;, age: 18 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="11-打乱数组顺序"><a href="#11-打乱数组顺序" class="headerlink" title="11. 打乱数组顺序"></a>11. 打乱数组顺序</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="keyword">let</span> arr_ = arr.sort(<span class="function">() =&gt;</span> <span class="built_in">Math</span>.random() - <span class="number">0.5</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arr_);</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-可选链操作符"><a href="#12-可选链操作符" class="headerlink" title="12. 可选链操作符?."></a>12. 可选链操作符?.</h2><p>克服以往如果将一个不存在的属性值赋值给一个变量时会报错，此时使用<strong>可选链操作符</strong>将会把<code>undefined</code>值赋值给它。</p>
+<p>只有当a存在，同时a具有name属性的时候，才会把值赋给b，否则就会将undefined赋值给b。重要的是，a是否有name属性，这么做都不会报错。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;zsh&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = a ?.name?.age</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    <span class="attr">name</span>:&#123;<span class="attr">alis</span>:<span class="string">&#x27;zsh&#x27;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = a ?.name?.alis</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// zsh</span></span><br><span class="line"><span class="keyword">let</span> c = a ?.name?.other <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="13-空值合并运算符"><a href="#13-空值合并运算符" class="headerlink" title="13. 空值合并运算符??"></a>13. 空值合并运算符??</h2><p><code>??</code> 这个和 <code>||</code> 很像，但是它<strong>不会屏蔽掉false和 0</strong>，即在未定义时来用最为恰当，其余地方使用<code>||</code>即可。【当a除了undefined、或者null之外的任何值，都会将a的值赋值给b，否则就将??右侧的值赋值给b】</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> b=a??<span class="string">&#x27;cc&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> b=a??<span class="string">&#x27;cc&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> b=a||<span class="string">&#x27;cc&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//&#x27;cc&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="14-逻辑空赋值"><a href="#14-逻辑空赋值" class="headerlink" title="14. 逻辑空赋值"></a>14. 逻辑空赋值</h2><p>当<code>??=</code>左侧的值为null、undefined的时候,才会将右侧变量的值赋值给左侧变量，其他所有值都不会进行赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="literal">null</span></span><br><span class="line"><span class="keyword">let</span> c=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> d =<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">b ??= a</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//1</span></span><br><span class="line"></span><br><span class="line">c ??=a</span><br><span class="line"><span class="built_in">console</span>.log(c) <span class="comment">//0</span></span><br><span class="line"></span><br><span class="line">d ??=a</span><br><span class="line"><span class="built_in">console</span>.log(d) <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="15-默认参数"><a href="#15-默认参数" class="headerlink" title="15. 默认参数"></a>15. 默认参数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> search = <span class="function">(<span class="params">arr, low=<span class="number">0</span>,high=arr.length-<span class="number">1</span></span>) =&gt;</span> high</span><br><span class="line"><span class="built_in">console</span>.log(search([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])) <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="16-arguments"><a href="#16-arguments" class="headerlink" title="16. arguments"></a>16. arguments</h2><p>arguments为函数中的关键字，值得注意的是，<strong>箭头函数</strong>中使用<strong>arguments</strong>是会<strong>报错</strong>的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); <span class="comment">//[Arguments] &#123; &#x27;0&#x27;: 2, &#x27;1&#x27;: 34, &#x27;2&#x27;: 1 &#125;，arguments也有length属性</span></span><br><span class="line">    <span class="built_in">console</span>.log([...arguments]); <span class="comment">//[ 2, 34, 1 ]</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">2</span>, <span class="number">34</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="17-十进制-gt-二进制-十六进制"><a href="#17-十进制-gt-二进制-十六进制" class="headerlink" title="17. 十进制==&gt;二进制/十六进制"></a>17. 十进制==&gt;二进制/十六进制</h2><p>使用<code>toString</code>方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">19</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换为16进制</span></span><br><span class="line"><span class="keyword">let</span> b = a.toString(<span class="number">16</span>)</span><br><span class="line"><span class="built_in">console</span>.log(b);<span class="comment">//13</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换为2进制</span></span><br><span class="line"><span class="keyword">let</span> c = a.toString(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(c);<span class="comment">//10011</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="18-判断回文字符"><a href="#18-判断回文字符" class="headerlink" title="18. 判断回文字符"></a>18. 判断回文字符</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPalindrome</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str == str.split(<span class="string">&#x27;&#x27;</span>).reverse().join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(isPalindrome(<span class="string">&#x27;ana&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="19-使用Object属性转成属性数组"><a href="#19-使用Object属性转成属性数组" class="headerlink" title="19. 使用Object属性转成属性数组"></a>19. 使用Object属性转成属性数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zsh&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(a)); <span class="comment">//[ &#x27;name&#x27;, &#x27;age&#x27; ]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(a)); <span class="comment">//[ &#x27;zsh&#x27;, 18 ]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(a)); <span class="comment">//[ [ &#x27;name&#x27;, &#x27;zsh&#x27; ], [ &#x27;age&#x27;, 18 ] ] </span></span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(a))</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//Map(2) &#123; &#x27;name&#x27; =&gt; &#x27;zsh&#x27;, &#x27;age&#x27; =&gt; 18 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="20-使用解构简单交换两值"><a href="#20-使用解构简单交换两值" class="headerlink" title="20. 使用解构简单交换两值"></a>20. 使用解构简单交换两值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a, b] = [b, a]</span><br><span class="line"><span class="built_in">console</span>.log(a, b); <span class="comment">//2,3</span></span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/05/02/2022/js_skills/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/05/02/2022/CSS/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            CSS常见问题
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/01/2022/js-all/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JS终极总结</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "s2JxkWTPgexxLPFUgyH6NOnG-gzGzoHsz",
+    app_key: "Bp2E1k5nLuVzianDGDY3Mmh3",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> crazyzsh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="crazyzsh博客空间"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/life">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/resource">资源</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/alipay.png">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/wechatPay.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
