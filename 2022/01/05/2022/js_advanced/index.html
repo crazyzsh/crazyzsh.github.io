@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>JS高级 |  crazyzsh博客空间</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-2022/js_advanced"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JS高级
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/01/05/2022/js_advanced/" class="article-date">
+  <time datetime="2022-01-05T01:14:44.000Z" itemprop="datePublished">2022-01-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a> / <a class="article-category-link" href="/categories/web/js/">js</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="十一、原型与继承"><a href="#十一、原型与继承" class="headerlink" title="十一、原型与继承"></a>十一、原型与继承</h1><h2 id="1-基础api"><a href="#1-基础api" class="headerlink" title="1. 基础api"></a>1. 基础api</h2><h3 id="1-1-getPrototypeOf"><a href="#1-1-getPrototypeOf" class="headerlink" title="1.1 getPrototypeOf"></a>1.1 getPrototypeOf</h3><ul>
+<li><p>获取某个对象的原型</p>
+</li>
+<li><p>用法：<code>Object.getPrototypeOf(object)</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组</span></span><br><span class="line"><span class="keyword">let</span> a = [<span class="string">&quot;a&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> b = a.concat(<span class="string">&quot;b&quot;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="keyword">let</span> x = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> y = &#123;<span class="attr">name</span>:<span class="string">&quot;张三&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(a) == <span class="built_in">Object</span>.getPrototypeOf(b)); <span class="comment">//true</span></span><br><span class="line"><span class="comment">//对象的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(x) == <span class="built_in">Object</span>.getPrototypeOf(y)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-isPrototypeOf"><a href="#1-2-isPrototypeOf" class="headerlink" title="1.2 isPrototypeOf"></a>1.2 isPrototypeOf</h3><ul>
+<li><p>测试一个对象是否存在于另一个对象的原型链上</p>
+</li>
+<li><p>用法：<code>prototypeObj.isPrototypeOf(object)</code></p>
+</li>
+</ul>
+<h3 id="1-3-hasOwnProperty"><a href="#1-3-hasOwnProperty" class="headerlink" title="1.3 hasOwnProperty"></a>1.3 hasOwnProperty</h3><ul>
+<li>返回一个布尔值</li>
+<li>指示对象自身属性中是否具有指定的属性（也就是，是否有指定的键）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object1 = &#123;&#125;;</span><br><span class="line">object1.property1 = <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(object1.hasOwnProperty(<span class="string">&#x27;property1&#x27;</span>));</span><br><span class="line"><span class="comment">// expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(object1.hasOwnProperty(<span class="string">&#x27;toString&#x27;</span>));</span><br><span class="line"><span class="comment">// expected output: false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-create"><a href="#1-4-create" class="headerlink" title="1.4 create"></a>1.4 create</h3><ul>
+<li><p><strong><code>Object.create()</code><strong>方法创建一个新对象，使用</strong>现有的对象</strong>来<strong>提供新创建的对象</strong>的__proto__</p>
+</li>
+<li><p>语法：<code>Object.create(proto，[propertiesObject])</code>第二个参数为可选项</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">isHuman</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">printIntroduction</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>. Am I human? <span class="subst">$&#123;<span class="built_in">this</span>.isHuman&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这是最原始的定义对象的形式，只是我们省略了直接进行创建了而已</span></span><br><span class="line"><span class="keyword">const</span> me = <span class="built_in">Object</span>.create(person);</span><br><span class="line"></span><br><span class="line">me.name = <span class="string">&#x27;Matthew&#x27;</span>; <span class="comment">// &quot;name&quot; is a property set on &quot;me&quot;, but not on &quot;person&quot;</span></span><br><span class="line">me.isHuman = <span class="literal">true</span>; <span class="comment">// inherited properties can be overwritten</span></span><br><span class="line"></span><br><span class="line">me.printIntroduction();</span><br><span class="line"><span class="comment">// expected output: &quot;My name is Matthew. Am I human? true&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//me本身是没有hasOwnProperty这个方法的，是me原型上有这个方法</span></span><br><span class="line">me.hasOwnProperty(<span class="string">&#x27;name&#x27;</span>)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>创建一个没有原型的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test = <span class="built_in">Object</span>.create(<span class="literal">null</span>, &#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">         <span class="attr">value</span>: <span class="string">&quot;张三&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">test.hasOwnProperty(<span class="string">&#x27;name&#x27;</span>)<span class="comment">//hasOwnProperty不是一个函数，因为test没有原型对象</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-proto"><a href="#1-5-proto" class="headerlink" title="1.5 __proto__"></a>1.5 <code>__proto__</code></h3><p>给原型追加属性或者方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//给a对象自身追加属性</span></span><br><span class="line">a.name=<span class="string">&quot;张三&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//给a对象自身追加方法</span></span><br><span class="line">a.hi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&quot;a自身的hi方法&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//给a对象原型追加方法</span></span><br><span class="line">a.__proto__.hi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&quot;a原型的hi方法&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//就近原则，如果有，则用自身，否则向原型进行搜索，直到顶层</span></span><br><span class="line">a.hi()<span class="comment">//a自身的hi方法</span></span><br></pre></td></tr></table></figure>
+
+<p>非自定义构造函数（类）创建</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>, <span class="number">23</span>, <span class="string">&quot;jj&quot;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__ == <span class="built_in">Array</span>.prototype); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态赋方法</span></span><br><span class="line">c.hi = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;hi方法&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原型追加方法</span></span><br><span class="line">c.__proto__.say = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;say方法&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(c.__proto__ == <span class="built_in">Object</span>.prototype); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/%E7%AE%80%E5%8D%95%E7%B1%BB%E5%9E%8B%E5%88%9B%E5%BB%BA.png" alt="image-20220105144818542"></p>
+<p>一般来说，<strong>简单类型</strong>对象进行创建时，可以直接在其<strong>本身获得</strong>相应的<strong>方法或者属性</strong>，而由函数（构造函数）、类创建的对象则是将<strong>属性</strong>直接赋予实例本身，<strong>方法</strong>则在其原型上【减少开销，避免每生产一个对象就另外开辟一个空间，而是选择继承】</p>
+<h3 id="1-6-proto-amp-prototype"><a href="#1-6-proto-amp-prototype" class="headerlink" title="1.6 __proto__ &amp; prototype"></a>1.6 <code>__proto__ &amp; prototype</code></h3><ul>
+<li><p><code>__proto__</code>服务于一个<em><strong>具体的对象</strong></em>【直接创建的对象/由构造函数或者类实例化出来的对象】，可以称之为对象的<strong>隐式原型</strong>，我们可以直接在这种类型的对象上<strong>追加属性</strong>或者<strong>方法</strong></p>
+</li>
+<li><p><strong>prototype</strong>服务于“抽象的对象”，例如构造函数本身（Array、Object、String、Number、Boolean、Date自定义构造函数），其中<code>实例对象.__proto__==抽象对象.prototype</code>，也可以称之为<strong>显示原型</strong></p>
+</li>
+<li><p>谷歌浏览器中如果直接打印对象的话会直接显示<code>[[Prototype]]:显示原型</code></p>
+<ul>
+<li><p>由String、Number、Boolean、Array、Object<strong>关键字</strong>===&gt;打印直接显示<code>[[Prototype]]:Array/Object</code>，同时<code>xxx instanceof Object/Array/Boolean/String/Number===true</code>，其中<strong>所有由关键字创建</strong>的都属于Object，即<code>xxx instanceof Object===true</code></p>
+</li>
+<li><p>或者直接创建<strong>数组</strong>或者<strong>对象</strong>===&gt;打印直接显示<code>[[Prototype]]:Array/Object</code>，同时<code>xxx instanceof Object/Array===true</code></p>
+</li>
+<li><p>字面量创建的Number，Boolean，String则<strong>不会</strong>打印原型，且<code>xxx instanceof Number/Boolean/String===false</code>，即非对象实例，因此返回 false</p>
+</li>
+<li><p>由构造函数创建的对象，不要直接看控制台中的<code>[[Prototype]]:xxx</code>，实际上的prototype是<code>constructor</code>的属性值，同时和constructor同一级的就是该实例对象的原型上的方法【属性在实例对象本身，方法在实例对象的原型上】</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们只是遵循约定将构造函数首字母进行大写，其实大小写无关紧要</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.dir(test);</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> test()</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__ == test.prototype); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.dir(Test);</span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> Test()</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__ == Test.prototype); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B.png" alt="image-20220105105051028"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">sex</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">introduction</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`我是<span class="subst">$&#123;<span class="built_in">this</span>.sex&#125;</span>的`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">course, sex</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(sex)</span><br><span class="line">        <span class="built_in">this</span>.course = course</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">teach</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.introduction()</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`我教<span class="subst">$&#123;<span class="built_in">this</span>.course&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Teacher(<span class="string">&quot;地理&quot;</span>, <span class="string">&quot;男&quot;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(test);</span><br><span class="line">test.teach()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(test.__proto__ == Teacher.prototype); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(test.__proto__ == Person.prototype); <span class="comment">//false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>谷歌浏览器对应查看方法如下：</p>
+<p><img src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/%E5%8E%9F%E5%9E%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9F%A5%E7%9C%8B.png" alt="image-20220105142036051"></p>
+<h3 id="1-7-instanceof"><a href="#1-7-instanceof" class="headerlink" title="1.7 instanceof"></a>1.7 instanceof</h3><p><strong><code>instanceof</code></strong> <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = []</span><br><span class="line"><span class="keyword">let</span> b = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;JIAN&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(b <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(c <span class="keyword">instanceof</span> <span class="built_in">String</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(c <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-原型基础"><a href="#2-原型基础" class="headerlink" title="2. 原型基础"></a>2. 原型基础</h2><h3 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h3><p>每个对象都有一个原型<code>prototype</code>对象，通过函数创建的对象也将拥有这个原型对象。原型是一个指向对象的指针。</p>
+<ul>
+<li>可以将原型理解为对象的父亲，对象从原型对象继承来属性</li>
+<li>使用原型对象为多个对象共享属性或方法</li>
+<li>如果对象本身不存在属性或方法将到原型上查找</li>
+<li>使用原型可以解决，通过构建函数创建对象时复制多个函数造成的内存占用问题</li>
+<li>原型包含 <code>constructor</code> 属性，指向构造函数</li>
+</ul>
+<p>下例使用的就是<strong>数组原型对象</strong>的 <code>concat</code> 方法完成的连接操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组</span></span><br><span class="line"><span class="keyword">let</span> a = [<span class="string">&quot;a&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> b = a.concat(<span class="string">&quot;b&quot;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="keyword">let</span> x = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> y = &#123;<span class="attr">name</span>:<span class="string">&quot;张三&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(a) == <span class="built_in">Object</span>.getPrototypeOf(b)); <span class="comment">//true</span></span><br><span class="line"><span class="comment">//对象的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(x) == <span class="built_in">Object</span>.getPrototypeOf(y)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>数组的原型对象【两层】：</p>
+<ul>
+<li><code>[[Prototype]] : Array</code></li>
+<li><code>[[Prototype]] : Object</code></li>
+</ul>
+<p>对象的原型对象【一层】：</p>
+<ul>
+<li><code>[[Prototype]] : Object</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(a) == <span class="built_in">Object</span>.getPrototypeOf(b)); <span class="comment">//true</span></span><br><span class="line"><span class="comment">//对象的原型一样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(x) == <span class="built_in">Object</span>.getPrototypeOf(y)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/01/05/2022/js_advanced/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/01/06/2022/Linux/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Linux
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/01/02/2022/TypeScript/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">TypeScript初级</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "s2JxkWTPgexxLPFUgyH6NOnG-gzGzoHsz",
+    app_key: "Bp2E1k5nLuVzianDGDY3Mmh3",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> crazyzsh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="crazyzsh博客空间"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/life">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/resource">资源</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/alipay.png">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://raw.githubusercontent.com/crazyzsh/myImage/main/imageTest/wechatPay.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
