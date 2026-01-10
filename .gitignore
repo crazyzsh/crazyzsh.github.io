@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp
+temp-gitee-deploy/
+.temp/

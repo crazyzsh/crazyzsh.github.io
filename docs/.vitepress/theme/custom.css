@@ -1,0 +1,13 @@
+.vp-doc h1 {
+  font-weight: 600;
+}
+
+.vp-doc h2 {
+  font-weight: 600;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 0.5rem;
+}
+
+.vp-doc pre {
+  border-radius: 8px;
+}
