@@ -10,8 +10,8 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "gen-index": "node scripts/generate-index.mjs",
-    "prebuild": "node scripts/generate-index.mjs"
+    "gen-home": "node scripts/generate-home.mjs",
+    "prebuild": "node scripts/generate-home.mjs"
   },
   "keywords": [],
   "author": "",
