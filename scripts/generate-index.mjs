@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Auto-generate index.md files for documentation categories
- * Run this script to update all category index files with current document list
+ * Auto-generate VitePress config and index files
+ * Run this script to auto-update all configuration when docs change
  */
 
 import fs from 'fs'
@@ -33,9 +33,32 @@ function getTitle(content) {
   return match ? match[1].trim() : null
 }
 
-function getDescription(content) {
-  const match = content.match(/^##\s+(.+)$/m)
-  return match ? match[1].trim() : null
+function scanCategories() {
+  const categories = fs.readdirSync(DOCS_DIR)
+    .filter(dir => {
+      const dirPath = path.join(DOCS_DIR, dir)
+      return fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()
+    })
+    .filter(dir => !dir.startsWith('.') && dir !== 'index.md')
+    .sort()
+
+  return categories
+}
+
+function scanFiles(category) {
+  const categoryPath = path.join(DOCS_DIR, category)
+  const files = fs.readdirSync(categoryPath)
+    .filter(f => f.endsWith('.md'))
+    .filter(f => f !== 'index.md')
+    .sort()
+
+  return files
+}
+
+function getFileTitle(category, file) {
+  const filePath = path.join(DOCS_DIR, category, file)
+  const content = fs.readFileSync(filePath, 'utf-8')
+  return getTitle(content) || file.replace('.md', '')
 }
 
 function generateIndexContent(category, files) {
@@ -43,21 +66,13 @@ function generateIndexContent(category, files) {
   const name = CATEGORY_NAME[category] || category
 
   let content = `# ${name} ${emoji}\n\n`
-
-  const description = `这是 ${name} 分类下的文档列表。\n\n`
-  content += description
-
+  content += `这是 ${name} 分类下的文档列表。\n\n`
   content += '## 文档列表\n\n'
 
   files.forEach(file => {
-    const filePath = path.join(DOCS_DIR, category, file)
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
-    const title = getTitle(fileContent)
-
-    if (title && file !== 'index.md') {
-      const link = file.replace('.md', '')
-      content += `- [${title}](./${link})\n`
-    }
+    const title = getFileTitle(category, file)
+    const link = file.replace('.md', '')
+    content += `- [${title}](./${link})\n`
   })
 
   content += '\n---\n\n'
@@ -66,41 +81,96 @@ function generateIndexContent(category, files) {
   return content
 }
 
-function scanCategory(category) {
-  const categoryPath = path.join(DOCS_DIR, category)
+function generateConfig(categories) {
+  const navItems = categories.map(cat => {
+    const name = CATEGORY_NAME[cat] || cat
+    const emoji = CATEGORY_EMOJI[cat] || ''
+    return `{ text: '${name} ${emoji}', link: '/${cat}/' }`
+  }).join(',\n      ')
 
-  if (!fs.existsSync(categoryPath)) {
-    return []
+  const sidebarItems = categories.map(cat => {
+    const name = CATEGORY_NAME[cat] || cat
+    const files = scanFiles(cat)
+    const items = files.map(file => {
+      const title = getFileTitle(cat, file)
+      const link = `/${cat}/${file.replace('.md', '')}`
+      return `{ text: '${title}', link: '${link}' }`
+    }).join(',\n            ')
+
+    return `      '/${cat}/': [
+        {
+          text: '${name}',
+          items: [
+            ${items}
+          ]
+        }
+      ]`
+  }).join(',\n\n')
+
+  return `import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  title: 'AI 学习资料',
+  description: 'AI 学习资料与文档',
+  themeConfig: {
+    nav: [
+      { text: '首页', link: '/' },
+      ${navItems}
+    ],
+    sidebar: {
+${sidebarItems}
+    },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/' }
+    ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2024-present'
+    }
   }
-
-  const files = fs.readdirSync(categoryPath)
-    .filter(f => f.endsWith('.md'))
-    .sort()
-
-  return files
+})
+`
 }
 
 function updateIndexes() {
   console.log('🔄 正在更新文档目录...\n')
 
-  const categories = fs.readdirSync(DOCS_DIR)
-    .filter(dir => {
-      const dirPath = path.join(DOCS_DIR, dir)
-      return fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()
-    })
-    .filter(dir => CATEGORY_NAME[dir])
+  const categories = scanCategories()
 
   categories.forEach(category => {
-    const files = scanCategory(category)
+    const files = scanFiles(category)
     const content = generateIndexContent(category, files)
-
     const indexPath = path.join(DOCS_DIR, category, 'index.md')
     fs.writeFileSync(indexPath, content, 'utf-8')
-
     console.log(`✅ 已更新: ${category}/index.md (${files.length} 篇文档)`)
   })
 
-  console.log('\n✨ 目录更新完成!')
+  console.log()
 }
 
-updateIndexes()
+function updateConfig() {
+  console.log('🔄 正在更新 VitePress 配置...\n')
+
+  const categories = scanCategories()
+  const config = generateConfig(categories)
+
+  const configPath = path.join(DOCS_DIR, '.vitepress/config.mjs')
+  fs.writeFileSync(configPath, config, 'utf-8')
+
+  console.log(`✅ 已更新: .vitepress/config.mjs`)
+  console.log(`   发现 ${categories.length} 个分类`)
+}
+
+function main() {
+  console.log('🚀 VitePress 文档自动配置工具\n')
+  console.log('================================\n')
+
+  updateIndexes()
+  updateConfig()
+
+  console.log('\n================================')
+  console.log('✨ 配置更新完成!')
+  console.log('\n提示: 运行 npm run docs:build 预览效果')
+}
+
+main()
