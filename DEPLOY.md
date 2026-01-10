@@ -22,21 +22,57 @@ git push origin main
 
 ### 3. 访问站点
 
-部署完成后访问：`https://[用户名].github.io/[仓库名]/`
+部署完成后访问：`https://crazyzsh.github.io/`
 
 ---
 
-## 本地预览
+## 本地开发
+
+### 实时预览（热更新）
 
 ```bash
-# 开发模式（热更新）
 npm run docs:dev
+```
 
-# 构建生产版本
+启动后访问 `http://localhost:5173`，支持：
+- 文件修改实时更新
+- 新增文件夹/文档自动反映在导航栏
+- 无需刷新页面
+
+### 构建生产版本
+
+```bash
 npm run docs:build
+```
 
-# 预览构建结果
+### 预览构建结果
+
+```bash
 npm run docs:preview
+```
+
+---
+
+## 添加新内容
+
+### 新增分类
+
+在 `docs/` 下创建新文件夹，添加 `.md` 文件即可：
+
+```bash
+mkdir docs/new-topic
+# 添加你的文档
+```
+
+导航栏和侧边栏会自动更新。
+
+### 新增文档
+
+在对应分类目录下添加 `.md` 文件：
+
+```bash
+# 文档第一行作为标题
+echo "# 我的新文档" > docs/ai-assistants/my-new-doc.md
 ```
 
 ---
@@ -46,8 +82,7 @@ npm run docs:preview
 ```
 docs/
 ├── .vitepress/
-│   ├── config.mjs     # VitePress 配置
-│   └── theme/         # 主题文件
+│   └── config.mjs     # VitePress 配置（自动生成导航）
 ├── ai-assistants/     # AI 助手文档
 ├── tools-platform/    # 工具平台文档
 ├── data-visualization/# 数据可视化文档
@@ -57,20 +92,18 @@ docs/
 
 ---
 
-## 添加新文档
+## 常见问题
 
-1. 在对应分类目录创建 `.md` 文件
-2. 添加 frontmatter（可选）：
+**Q: 新增文件夹后导航栏没更新？**
 
-```markdown
----
-title: 文档标题
----
+A:
+1. 本地：重启 `npm run docs:dev`
+2. 线上：推送后 GitHub Actions 自动更新
 
-# 文档标题
+**Q: 如何自定义分类名称？**
 
-内容...
-```
+A: 在 `config.mjs` 中修改 `CATEGORY_NAME` 映射
 
-3. 文档会自动出现在侧边栏和导航中。
-更新部署文档时间戳
+**Q: 文档标题如何显示 emoji？**
+
+A: 在文档第一行标题中添加，如 `# AI 助手 🤖`
