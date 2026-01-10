@@ -1,8 +1,12 @@
 # 投资分析 💰
 
-投资市场分析与策略。
+这是 投资分析 分类下的文档列表。
 
 ## 文档列表
 
-- [Polymarket 投资策略](./polymarket-investment-strategy)
-- [Polymarket 分析](./polymarket-analysis)
+- [Polymarket 预测市场平台分析](./polymarket-analysis)
+- [利用 Polymarket 进行投资决策指南](./polymarket-investment-strategy)
+
+---
+
+*最后更新: 2026/1/11*

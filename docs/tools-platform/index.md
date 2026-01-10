@@ -1,8 +1,12 @@
 # 工具平台 🛠️
 
-各类 AI 相关平台工具分析。
+这是 工具平台 分类下的文档列表。
 
 ## 文档列表
 
-- [Keyden 分析](./keyden-analysis)
-- [Alertivity 分析](./alertivity-analysis)
+- [Alertivity 系统监控工具分析](./alertivity-analysis)
+- [Keyden TOTP 验证器分析](./keyden-analysis)
+
+---
+
+*最后更新: 2026/1/11*

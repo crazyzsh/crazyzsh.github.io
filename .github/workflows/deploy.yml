@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate index files
+        run: npm run gen-index
+
       - name: Build VitePress
         run: npm run docs:build
 
