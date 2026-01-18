@@ -117,167 +117,66 @@ opencode
 
 ## 六、命令列表 📋
 
-### 6.1 常用命令
+### 6.1 TUI 内置命令
 
-| 命令 | 功能 | 快捷键 | 别名 |
-|------|------|--------|------|
-| `/help` | 显示帮助菜单 | `ctrl+x h` | - |
-| `/connect` | 添加 LLM 提供商 | - | - |
-| `/init` | 创建/更新 AGENTS.md | `ctrl+x i` | - |
-| `/models` | 列出可用模型 | `ctrl+x m` | - |
-| `/new` | 开始新会话 | `ctrl+x n` | `/clear` |
-| `/sessions` | 列出/切换会话 | `ctrl+x l` | `/resume`, `/continue` |
-| `/share` | 分享当前会话 | `ctrl+x s` | - |
-| `/unshare` | 取消分享 | - | - |
-| `/compact` | 压缩当前会话 | `ctrl+x c` | `/summarize` |
-| `/undo` | 撤销最近一次对话及文件更改 | `ctrl+x u` | - |
-| `/redo` | 重做被撤销的更改 | `ctrl+x r` | - |
-| `/exit` | 退出 OpenCode | `ctrl+x q` | `/quit`, `/q` |
+| 命令 | 功能 | 快捷键 | 别名 | 使用场景 |
+|------|------|--------|------|----------|
+| `/help` | 显示帮助菜单 | `ctrl+x h` | - | 忘记命令时查看所有可用命令 |
+| `/connect` | 添加 LLM 提供商 | - | - | 首次使用或添加新的 AI 提供商 |
+| `/init` | 创建/更新 AGENTS.md | `ctrl+x i` | - | 新项目初始化，让 AI 理解项目结构 |
+| `/models` | 列出可用模型 | `ctrl+x m` | - | 查看可选的 AI 模型列表 |
+| `/new` | 开始新会话 | `ctrl+x n` | `/clear` | 切换到新任务，清空对话上下文 |
+| `/sessions` | 列出/切换会话 | `ctrl+x l` | `/resume`, `/continue` | 继续之前的工作会话 |
+| `/share` | 分享当前会话 | `ctrl+x s` | - | 与团队成员分享对话内容 |
+| `/unshare` | 取消分享 | - | - | 取消已分享的会话链接 |
+| `/compact` | 压缩当前会话 | `ctrl+x c` | `/summarize` | 对话过长时减少 token 消耗 |
+| `/undo` | 撤销最近一次对话及文件更改 | `ctrl+x u` | - | AI 生成代码错误时回退 |
+| `/redo` | 重做被撤销的更改 | `ctrl+x r` | - | 恢复被错误撤销的内容 |
+| `/exit` | 退出 OpenCode | `ctrl+x q` | `/quit`, `/q` | 结束工作，退出程序 |
+| `/editor` | 打开外部编辑器编写消息 | `ctrl+x e` | - | 复杂提示词需要详细编写时 |
+| `/export` | 导出对话为 Markdown | `ctrl+x x` | - | 保存对话记录用于文档 |
+| `/details` | 切换工具执行详情显示 | `ctrl+x d` | - | 调试时查看 AI 执行步骤 |
+| `/theme` | 切换主题 | `ctrl+x t` | - | 切换 TUI 外观主题 |
+| `/thinking` | 切换思考/推理块显示 | - | - | 查看模型的推理过程 |
 
-### 6.2 编辑与工具命令
-
-| 命令 | 功能 | 快捷键 | 说明 |
-|------|------|--------|------|
-| `/editor` | 打开外部编辑器编写消息 | `ctrl+x e` | 使用 `$EDITOR` 环境变量 |
-| `/export` | 导出对话为 Markdown | `ctrl+x x` | 在编辑器中打开 |
-| `/details` | 切换工具执行详情显示 | `ctrl+x d` | 查看 AI 执行步骤 |
-| `/theme` | 切换主题 | `ctrl+x t` | `/themes` |
-| `/thinking` | 切换思考/推理块显示 | - | 显示模型推理过程 |
-
-### 6.3 命令详解
-
-#### `/help` - 帮助菜单
-```
-/help
-```
-显示所有可用命令和快捷键说明。
-
-#### `/connect` - 连接 LLM
-```
-/connect
-```
-添加或管理 LLM 提供商：
-1. 从列表中选择提供商
-2. 输入 API key
-3. 完成认证
-
-#### `/init` - 初始化项目
-```
-/init
-```
-分析项目结构，创建或更新 `AGENTS.md` 文件。
-
-#### `/models` - 模型列表
-```
-/models
-```
-显示所有可用的 AI 模型及其信息。
-
-#### `/new` - 新会话
-```
-/new
-```
-开始新的对话会话。`/clear` 是别名。
-
-#### `/sessions` - 会话管理
-```
-/sessions
-```
-列出所有会话，可切换到历史会话继续工作。 别名：`/resume`, `/continue`
-
-#### `/share` - 分享会话
-```
-/share
-```
-生成会话链接并复制到剪贴板，可分享给团队成员。
-
-#### `/unshare` - 取消分享
-```
-/unshare
-```
-撤销分享，删除已分享的会话链接。
-
-#### `/compact` - 压缩会话
-```
-/compact
-/summarize
-```
-压缩对话历史，减少 token 消耗但保留上下文。
-
-#### `/undo` - 撤销
-```
-/undo
-```
-撤销最近一次用户消息、AI 回复及所有文件更改。  
-**要求**：项目必须是 Git 仓库。  
-**快捷键**：`ctrl+x u`
-
-#### `/redo` - 重做
-```
-/redo
-```
-恢复被 `/undo` 撤销的更改。  
-**快捷键**：`ctrl+x r`
-
-#### `/exit` - 退出
-```
-/exit
-/quit
-/q
-```
-退出 OpenCode。**快捷键**：`ctrl+x q`
-
-#### `/editor` - 外部编辑器
-```
-/editor
-```
-在外部编辑器中编写消息（使用 `$EDITOR` 环境变量）。
-
-#### `/export` - 导出对话
-```
-/export
-```
-将当前对话导出为 Markdown 文件，在编辑器中打开。
-
-#### `/details` - 执行详情
-```
-/details
-```
-显示 AI 执行工具调用的详细过程。**快捷键**：`ctrl+x d`
-
-#### `/theme` - 主题切换
-```
-/theme
-/themes
-```
-切换 TUI 主题风格。**快捷键**：`ctrl+x t`
-
-#### `/thinking` - 思考显示
-```
-/thinking
-```
-切换模型思考/推理过程的可见性（仅部分模型支持）。
-
-### 6.4 文件引用
+### 6.2 文件引用
 
 使用 `@文件名` 引用文件内容到对话中：
 
-```
+```markdown
+# 引用单个文件
 How is auth handled in @src/auth.ts?
+
+# 引用多个文件
+Review @src/api.ts and @src/models/user.ts
+
+# 模糊搜索文件
+Explain the database layer in @*db*
 ```
 
-### 6.5 Bash 命令
+**使用场景**：
+- 让 AI 分析特定文件的代码
+- 引用配置文件进行修改
+- 查阅文档或测试文件
+
+### 6.3 Bash 命令
 
 以 `!` 开头执行 Shell 命令：
 
-```
-!ls -la
-!npm run test
+```bash
+!ls -la                    # 列出文件
+!npm run test              # 运行测试
+!git status                # 查看 Git 状态
+!npm install package       # 安装依赖
 ```
 
-命令输出会作为工具结果添加到对话中。
+**使用场景**：
+- 运行构建、测试命令
+- 查看文件目录结构
+- 执行 Git 操作
+- 管理开发环境
 
-### 6.6 自定义命令
+### 6.4 自定义命令
 
 在 `.opencode/commands/` 目录创建 Markdown 文件定义自定义命令：
 
@@ -292,6 +191,314 @@ model: anthropic/claude-3-5-sonnet
 ```
 
 使用 `/test` 执行自定义命令。
+
+---
+
+## 七、CLI 命令完整列表 📦
+
+OpenCode CLI 提供丰富的命令行接口，支持脚本化和自动化。
+
+### 7.1 基础命令
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode` | 启动 TUI 界面 | 日常交互式编程 |
+| `opencode tui [project]` | 启动终端界面 | 指定项目目录启动 |
+| `opencode run "提示词"` | 非交互式执行 | 脚本化、自动化任务 |
+| `opencode attach [url]` | 连接到远程服务器 | 使用远程后端服务 |
+
+### 7.2 会话管理
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode session list` | 列出所有会话 | 查看历史会话 |
+| `opencode export [sessionID]` | 导出会话为 JSON | 保存对话记录 |
+| `opencode import <file/URL>` | 导入会话 | 恢复或分享会话 |
+
+**使用示例**：
+```bash
+# 列出最近 10 个会话
+opencode session list -n 10
+
+# 导出指定会话
+opencode export abc123
+
+# 从文件导入
+opencode import session.json
+
+# 从分享链接导入
+opencode import https://opencode.ai/s/abc123
+```
+
+### 7.3 认证管理
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode auth login` | 登录提供商 | 配置 API keys |
+| `opencode auth list` | 列出已认证提供商 | 查看已配置的服务 |
+| `opencode auth ls` | 同上（简写） | - |
+| `opencode auth logout` | 退出登录 | 清除凭证 |
+
+**使用示例**：
+```bash
+# 交互式登录
+opencode auth login
+
+# 查看已配置的 API keys
+opencode auth list
+```
+
+### 7.4 MCP 服务器管理
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode mcp add` | 添加 MCP 服务器 | 集成外部工具 |
+| `opencode mcp list` | 列出所有 MCP 服务器 | 查看已配置服务 |
+| `opencode mcp ls` | 同上（简写） | - |
+| `opencode mcp auth [name]` | OAuth 认证 MCP 服务器 | 认证远程 MCP |
+| `opencode mcp auth list` | 列出 OAuth 状态 | 查看认证状态 |
+| `opencode mcp logout [name]` | 清除 MCP 认证 | 移除凭证 |
+| `opencode mcp debug <name>` | 调试 MCP 连接 | 排查连接问题 |
+
+**使用示例**：
+```bash
+# 添加 MCP 服务器（交互式）
+opencode mcp add
+
+# 列出所有 MCP 服务器
+opencode mcp list
+
+# 对特定服务器进行 OAuth 认证
+opencode mcp auth mastergo
+
+# 调试连接问题
+opencode mcp debug sentry
+```
+
+### 7.5 模型管理
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode models [provider]` | 列出可用模型 | 查看可选模型 |
+| `opencode models --refresh` | 刷新模型缓存 | 获取最新模型列表 |
+| `opencode models --verbose` | 详细模型信息 | 查看模型元数据（含成本） |
+
+**使用示例**：
+```bash
+# 列出所有可用模型
+opencode models
+
+# 过滤特定提供商
+opencode models anthropic
+
+# 刷新缓存获取最新模型
+opencode models --refresh
+
+# 查看详细模型信息
+opencode models --verbose
+```
+
+### 7.6 代理管理
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode agent create` | 创建自定义代理 | 配置专用代理 |
+| `opencode agent list` | 列出所有代理 | 查看可用代理 |
+
+**使用示例**：
+```bash
+# 交互式创建新代理
+opencode agent create
+
+# 查看已配置的代理
+opencode agent list
+```
+
+### 7.7 服务器命令
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode serve` | 启动无头服务器 | API 访问、远程连接 |
+| `opencode web` | 启动 Web 服务器 | 浏览器访问 |
+| `opencode acp` | 启动 ACP 服务器 | 兼容 ACP 的编辑器 |
+
+**使用示例**：
+```bash
+# 启动无头服务器（默认端口）
+opencode serve
+
+# 指定端口和主机
+opencode serve --port 4096 --hostname 0.0.0.0
+
+# 启动 Web 界面
+opencode web
+
+# 启动 ACP 服务器
+opencode acp
+```
+
+### 7.8 GitHub 集成
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode github install` | 安装 GitHub 代理 | 仓库自动化配置 |
+| `opencode github run` | 运行 GitHub 代理 | CI/CD 流程中使用 |
+
+**使用示例**：
+```bash
+# 在仓库中安装 GitHub 代理
+opencode github install
+
+# 在 GitHub Actions 中运行
+opencode github run --event pull_request
+```
+
+### 7.9 统计与工具
+
+| 命令 | 功能 | 使用场景 |
+|------|------|----------|
+| `opencode stats` | 查看使用统计 | 监控 token 消耗和成本 |
+| `opencode upgrade [版本]` | 升级 OpenCode | 更新到最新版本 |
+| `opencode uninstall` | 卸载 OpenCode | 清理安装 |
+
+**使用示例**：
+```bash
+# 查看最近 7 天统计
+opencode stats --days 7
+
+# 显示前 5 个使用最多的工具
+opencode stats --tools 5
+
+# 查看模型使用分布
+opencode stats --models 3
+
+# 升级到最新版本
+opencode upgrade
+
+# 升级到指定版本
+opencode upgrade v0.1.48
+
+# 卸载（保留配置）
+opencode uninstall --keep-config
+```
+
+### 7.10 全局参数
+
+| 参数 | 短参数 | 说明 |
+|------|--------|------|
+| `--help` | `-h` | 显示帮助 |
+| `--version` | `-v` | 打印版本号 |
+| `--print-logs` | - | 打印日志到 stderr |
+| `--log-level` | - | 日志级别（DEBUG/INFO/WARN/ERROR） |
+
+### 7.11 run 命令参数
+
+| 参数 | 短参数 | 说明 |
+|------|--------|------|
+| `--continue` | `-c` | 继续上一个会话 |
+| `--session` | `-s` | 指定会话 ID |
+| `--share` | - | 分享会话 |
+| `--model` | `-m` | 指定模型（provider/model） |
+| `--agent` | - | 指定代理 |
+| `--file` | `-f` | 附加文件到消息 |
+| `--format` | - | 输出格式（default/json） |
+| `--attach` | - | 连接到运行中的服务器 |
+
+**使用示例**：
+```bash
+# 快速执行（非交互式）
+opencode run "Explain closures in JavaScript"
+
+# 指定模型
+opencode run "Write a React component" --model anthropic/claude-3-5-sonnet
+
+# 附加文件
+opencode run "Review this code" --file src/auth.ts
+
+# 继续上次会话
+opencode run --continue
+
+# 连接到远程服务器执行
+opencode run --attach http://localhost:4096 "Fix the bug"
+```
+
+---
+
+## 八、使用场景指南 🎯
+
+### 场景 1：新项目初始化
+
+```bash
+# 1. 进入项目目录
+cd my-project
+
+# 2. 启动 OpenCode
+opencode
+
+# 3. 运行初始化
+/init
+
+# 4. 连接 LLM 提供商
+/connect
+```
+
+### 场景 2：快速代码修复
+
+```bash
+# 方法 1：TUI 模式
+opencode
+/undo  # 撤销错误修改
+
+# 方法 2：命令行快速修复
+opencode run "Fix the TypeScript error in src/api.ts"
+```
+
+### 场景 3：团队协作
+
+```bash
+# 分享当前会话
+/share
+
+# 导出对话记录
+opencode export > session.json
+
+# 团队成员导入
+opencode import session.json
+```
+
+### 场景 4：成本监控
+
+```bash
+# 查看本周使用统计
+opencode stats --days 7
+
+# 查看特定项目
+opencode stats --project my-project
+
+# 查看模型使用分布
+opencode stats --models 5
+```
+
+### 场景 5：自动化脚本
+
+```bash
+#!/bin/bash
+# 自动化代码审查脚本
+
+opencode run "Review the changes in this PR and suggest improvements" \
+  --file src/ \
+  --format json > review_result.json
+```
+
+### 场景 6：远程开发
+
+```bash
+# 服务器端：启动无头服务器
+opencode serve --port 4096 --hostname 0.0.0.0
+
+# 本地端：连接远程服务器
+opencode attach http://server-ip:4096
+```
 
 ## 七、隐私说明 🔒
 
