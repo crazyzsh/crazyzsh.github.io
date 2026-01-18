@@ -10,7 +10,8 @@ function getCategoryEmoji(name) {
     'tools-platform': '🛠️',
     'data-visualization': '📊',
     'tech-architecture': '🏗️',
-    'investment-analysis': '💰'
+    'investment-analysis': '💰',
+    'opencode-assistants': '💻'
   }
   return emojiMap[name] || '📄'
 }
@@ -21,7 +22,8 @@ function getCategoryName(name) {
     'tools-platform': '工具平台',
     'data-visualization': '数据可视化',
     'tech-architecture': '技术架构',
-    'investment-analysis': '投资分析'
+    'investment-analysis': '投资分析',
+    'opencode-assistants': 'OpenCode'
   }
   return nameMap[name] || name
 }
