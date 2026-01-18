@@ -113,6 +113,11 @@ No automated tests exist for this documentation repository. Manual review is req
 - Limit file length; split if over 500 lines
 - Use index files for directory navigation
 
+### Auto-Update Directory
+- A pre-commit hook automatically updates `index.md` when new `.md` files are added
+- New files are added under the `## 插件列表` or `## 文档列表` section
+- No manual directory updates required
+
 ### Git Workflow
 - Create feature branches for major changes
 - Write clear commit messages: "Add [topic]: description"
