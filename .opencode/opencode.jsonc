@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "mastergo": {
+      "type": "local",
+      "command": ["npx", "-y", "@mastergo/magic-mcp"],
+      "enabled": true,
+      "environment": {
+        "MG_MCP_TOKEN": "{env:MG_MCP_TOKEN}",
+        "API_BASE_URL": "https://mastergo.com"
+      }
+    }
+  }
+}
