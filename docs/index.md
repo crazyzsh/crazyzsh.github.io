@@ -35,3 +35,5 @@ features:
 
 lastUpdated: true
 ---
+
+- \[oh-my-opencode\](./opencode-assistants/oh-my-opencode.md)
