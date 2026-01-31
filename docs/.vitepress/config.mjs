@@ -11,7 +11,9 @@ function getCategoryEmoji(name) {
     'data-visualization': '📊',
     'tech-architecture': '🏗️',
     'investment-analysis': '💰',
-    'opencode-assistants': '💻'
+    'opencode-assistants': '💻',
+    'openclaw': '🦞',
+    'test-category': '📄'
   }
   return emojiMap[name] || '📄'
 }
@@ -23,7 +25,9 @@ function getCategoryName(name) {
     'data-visualization': '数据可视化',
     'tech-architecture': '技术架构',
     'investment-analysis': '投资分析',
-    'opencode-assistants': 'OpenCode'
+    'opencode-assistants': 'OpenCode',
+    'openclaw': 'OpenClaw',
+    'test-category': '测试分类'
   }
   return nameMap[name] || name
 }
@@ -71,13 +75,45 @@ function generateSidebar() {
 
 function generateNav() {
   const categories = scanCategories()
-  return [
-    { text: '首页', link: '/' },
-    ...categories.map(cat => ({
+
+  const categoryGroups = {
+    'AI 与编程': ['ai-assistants', 'openclaw', 'opencode-assistants'],
+    '数据与分析': ['data-visualization', 'investment-analysis'],
+    '技术与工具': ['tech-architecture', 'tools-platform']
+  }
+
+  const nav = [
+    { text: '首页', link: '/' }
+  ]
+
+  Object.entries(categoryGroups).forEach(([groupName, groupCats]) => {
+    const items = groupCats
+      .filter(cat => categories.includes(cat))
+      .map(cat => ({
+        text: `${getCategoryName(cat)} ${getCategoryEmoji(cat)}`,
+        link: `/${cat}/`
+      }))
+
+    if (items.length > 0) {
+      nav.push({
+        text: groupName,
+        items,
+        activeMatch: `/${groupCats.join('|')}/`
+      })
+    }
+  })
+
+  categories.filter(cat => {
+    const allGroupCats = Object.values(categoryGroups).flat()
+    return !allGroupCats.includes(cat)
+  }).forEach(cat => {
+    nav.push({
       text: `${getCategoryName(cat)} ${getCategoryEmoji(cat)}`,
       link: `/${cat}/`
-    }))
-  ]
+    })
+  })
+
+  return nav
 }
 
 export default defineConfig({
