@@ -15,8 +15,11 @@ hero:
 
 features:
   - title: AI 助手 🤖
-    details: OpenCode、Claude Code 等 AI 编程工具使用指南与最佳实践
+    details: OpenCode、Claude Code、OpenClaw 等 AI 编程工具使用指南与最佳实践
     link: /ai-assistants/
+  - title: OpenClaw 🦞
+    details: 开源个人 AI 助手平台，多渠道支持与本地运行
+    link: /openclaw/
   - title: 数据可视化 📊
     details: Antv、Mermaid 等可视化工具使用教程与对比
     link: /data-visualization/
@@ -37,3 +40,11 @@ lastUpdated: true
 ---
 
 - \[oh-my-opencode\](./opencode-assistants/oh-my-opencode.md)
+
+- \[channels\](./openclaw/channels.md)
+
+- \[configuration\](./openclaw/configuration.md)
+
+- \[installation\](./openclaw/installation.md)
+
+- \[security\](./openclaw/security.md)
