@@ -48,3 +48,7 @@ lastUpdated: true
 - \[installation\](./openclaw/installation.md)
 
 - \[security\](./openclaw/security.md)
+
+- \[commands\](./openclaw/commands.md)
+
+- \[setup-guide\](./openclaw/setup-guide.md)
