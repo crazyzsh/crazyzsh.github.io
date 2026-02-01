@@ -23,6 +23,10 @@ export OPENAI_API_KEY="你的API密钥"
 # MiniMax 示例
 export OPENAI_BASE_URL="https://api.minimax.chat/v1"
 export OPENAI_API_KEY="你的API密钥"
+
+# OpenAI 示例
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+export OPENAI_API_KEY="sk-..."
 ```
 
 ## 网关管理
@@ -173,16 +177,56 @@ openclaw gateway --port 18789 --verbose &
 # 4. 查看状态
 sleep 5
 openclaw status
+```
 
 ## 常用命令速查表
 
 |功能|命令|
 |------|------|
-|`openclaw gateway --port 18789 --verbose`|启动网关|
-|`pkill -f openclaw-gateway && openclaw gateway --port 18789`|重启网关|
-|`openclaw status`|查看状态|
-|`openclaw logs --follow`|实时日志|
-|`openclaw channels list`|通道列表|
-|`openclaw pairing approve telegram <code>`|配对批准|
-|`openclaw doctor`|健康检查|
-|`openclaw models list`|模型列表|
+|启动网关|`openclaw gateway --port 18789 --verbose`|
+|停止网关|`openclaw gateway stop`|
+|重启网关|`pkill -f openclaw-gateway && openclaw gateway --port 18789`|
+|查看状态|`openclaw status`|
+|实时日志|`openclaw logs --follow`|
+|通道列表|`openclaw channels list`|
+|配对批准|`openclaw pairing approve telegram <code>`|
+|健康检查|`openclaw doctor`|
+|模型列表|`openclaw models list`|
+
+## 控制台与 Telegram
+
+### 打开网关控制台
+
+浏览器访问：`http://127.0.0.1:18789/`
+
+### Telegram 对话
+
+1. 打开 Telegram
+2. 搜索：`@你的机器人用户名`
+3. 发送消息开始对话
+
+## 快速启动脚本
+
+创建 `~/start-openclaw.sh`：
+
+```bash
+#!/bin/bash
+export PATH="/Users/fangzhong/.local/share/pnpm:$PATH"
+export OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1"
+export OPENAI_API_KEY="你的API密钥"
+
+echo "启动 OpenClaw 网关..."
+openclaw gateway --port 18789 --verbose &
+sleep 3
+echo ""
+echo "✅ 网关已启动！"
+echo "📊 控制台: http://127.0.0.1:18789/"
+echo "💬 Telegram: @你的机器人用户名"
+```
+
+使用：
+
+```bash
+chmod +x ~/start-openclaw.sh
+~/start-openclaw.sh
+```
