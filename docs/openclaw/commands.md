@@ -211,9 +211,10 @@ openclaw status
 
 ```bash
 #!/bin/bash
+
 export PATH="/Users/fangzhong/.local/share/pnpm:$PATH"
 export OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1"
-export OPENAI_API_KEY="你的API密钥"
+export OPENAI_API_KEY="你的Gemini API Key"
 
 echo "启动 OpenClaw 网关..."
 openclaw gateway --port 18789 --verbose &
@@ -224,9 +225,24 @@ echo "📊 控制台: http://127.0.0.1:18789/"
 echo "💬 Telegram: @你的机器人用户名"
 ```
 
-使用：
+设置权限并使用：
 
 ```bash
 chmod +x ~/start-openclaw.sh
+
+# 启动网关
 ~/start-openclaw.sh
+```
+
+**后续只需执行**：
+
+```bash
+~/start-openclaw.sh
+```
+
+即可启动网关并看到：
+```
+✅ 网关已启动！
+📊 控制台: http://127.0.0.1:18789/
+💬 Telegram: @你的机器人用户名
 ```
