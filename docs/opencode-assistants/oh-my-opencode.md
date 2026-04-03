@@ -4,7 +4,7 @@
 
 **oh-my-openagent**（简称 **omo**，原名 oh-my-opencode）是 OpenCode 的终极增强插件，GitHub 星标数超过 47,000。它通过整合 11 个专业 AI 代理、提供强大的工具链和自动化能力，将 AI 编程体验提升到全新维度。
 
-作为本项目 [OpenCode 助手](./index.md) 文档体系的核心组成部分，oh-my-openagent 与 [OpenCode 使用指南](./opencode-usage.md)、[Claude Code 使用指南](./claude-code-usage.md) 形成互补，配合 [OpenClaw](../openclaw/index.md) 等多渠道 AI 助手方案，为中文开发者提供完整的 AI 编程工具链。
+作为本项目 [OpenCode 助手](./index.md) 文档体系的核心组成部分，oh-my-openagent 与 [OpenCode 使用指南](../ai-assistants/opencode-usage.md)、[Claude Code 使用指南](../ai-assistants/claude-code-usage.md) 形成互补，配合 [OpenClaw](../openclaw/index.md) 等多渠道 AI 助手方案，为中文开发者提供完整的 AI 编程工具链。
 
 ## 主要升级
 
